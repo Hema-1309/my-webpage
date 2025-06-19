@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HemaShopping</title>
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #e91e63;
+      --secondary: #2196f3;
+      --dark: #333;
+      --light: #f9f9f9;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+    }
+    
+    /* Login Page */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    .login-box {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .login-box h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    
+    .input-group {
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .login-btn:hover {
+      background-color: #d81b60;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+    
+    .credentials-note {
+      color: #666;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+    
+    /* Shopping Page */
+    #shoppingPage {
+      display: none;
+    }
+    
+    header {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .product {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .product-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .product-info {
+      padding: 1.25rem;
+    }
+    
+    .product-info h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+    
+    .product-info p {
+      color: #666;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        padding: 1rem;
+      }
+      
+      .login-box {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Page -->
+<div class="login-container" id="loginPage">
+  <div class="login-box">
+    <h2>Welcome to HemaShopping</h2>
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Username" required>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required>
+    </div>
+    <button class="login-btn" onclick="login()">Login</button>
+    <p class="credentials-note">Default credentials: admin / admin</p>
+  </div>
+</div>
+
+<!-- Shopping Gallery Page -->
+<div id="shoppingPage">
+  <header>
+    <h1>HemaShopping 🛍️</h1>
+  </header>
+  <div class="gallery">
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sneakers">
+      <div class="product-info">
+        <h3>Premium White Sneakers</h3>
+        <p>Comfortable and stylish</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Watch">
+      <div class="product-info">
+        <h3>Luxury Watch</h3>
+        <p>Elegant timepiece</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Smartphone">
+      <div class="product-info">
+        <h3>Latest Smartphone</h3>
+        <p>Advanced features</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Headphones">
+      <div class="product-info">
+        <h3>Wireless Headphones</h3>
+        <p>Amazing sound quality</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Lipstick">
+      <div class="product-info">
+        <h3>Lipstick Set</h3>
+        <p>Variety of shades</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1511499767150-a48a79f39864?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sunglasses">
+      <div class="product-info">
+        <h3>Designer Sunglasses</h3>
+        <p>UV protection</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Handbag">
+      <div class="product-info">
+        <h3>Trendy Handbag</h3>
+        <p>Stylish and spacious</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Laptop">
+      <div class="product-info">
+        <h3>Ultrabook Pro</h3>
+        <p>Powerful performance</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1615634265939-42cfbec4c53e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Perfume">
+      <div class="product-info">
+        <h3>Luxury Perfume</h3>
+        <p>Exotic fragrance</p>
+      </div>
+    </div>
+    <div class="product">
+      <img class="product-img" src="https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cookware">
+      <div class="product-info">
+        <h3>Kitchen Set</h3>
+        <p>Premium quality</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+
+    if (user === "admin" && pass === "admin") {
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("shoppingPage").style.display = "block";
+      // Scroll to top after login
+      window.scrollTo(0, 0);
+    } else {
+      alert("Invalid credentials! Try admin / admin");
+    }
+  }
+  
+  // Optional: Add keyboard support for login (Enter key)
+  document.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      login();
+    }
+  });
+</script>
+
+</body>
+</html>
